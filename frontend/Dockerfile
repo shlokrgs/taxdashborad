@@ -1,16 +1,16 @@
-# frontend/Dockerfile
-
+# Dockerfile inside frontend/
 FROM node:20
 
 WORKDIR /app
 
-# Copy only necessary files (not from frontend/ but from current dir)
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 RUN npm install
 
-# Now copy everything else
-COPY . .
+COPY public ./public
+COPY src ./src
+COPY tailwind.config.js .
+COPY index.css .
 
 RUN npm run build
 
